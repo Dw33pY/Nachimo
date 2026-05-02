@@ -323,6 +323,88 @@ function showToast(msg) {
   toast._timer = setTimeout(() => toast.classList.remove('is-visible'), 3500);
 }
 
+/* ——— SERVICE MODAL DATA & LOGIC ——— */
+const servicesData = {
+  // 8 Main Categories from Image
+  'plumbing': { title: 'Plumbing Services', desc: 'Comprehensive plumbing solutions for residential and commercial properties. We ensure reliable water systems and faultless installations.', list: ['Water Supply Systems', 'Pipe Fitting', 'Sanitary Installation', 'Leak Detection'] },
+  'maintenance': { title: 'General Maintenance', desc: 'Property upkeep and rapid repairs to keep your premises in top condition year-round.', list: ['Renovations & Upgrades', 'Wall Repairs', 'Flooring', 'Fixture Replacement'] },
+  'int-ext-design': { title: 'Interior & Exterior Design', desc: 'Elevate your spaces with our bespoke design services, blending aesthetics with functionality.', list: ['Space Planning', 'Colour Consultation', 'Decorative Finishes', 'Furniture Selection'] },
+  'landscaping-main': { title: 'Landscaping Services', desc: 'Transform your outdoor spaces with our comprehensive landscaping solutions, from concept to completion.', list: ['Garden Design', 'Hardscaping', 'Irrigation Systems', 'Tree Services', 'Water Features', 'Artificial Turf', 'Desert Landscaping', 'Garden Drainage'] },
+  'engineering': { title: 'Engineering & Fabrication', desc: 'Robust structural solutions and custom metalwork built to last.', list: ['Structural Works', 'Metal Fabrication', 'Welding Services', 'Custom Gates'] },
+  'staircases': { title: 'Staircases, Balustrades & Balconies', desc: 'Premium installations that combine safety with striking visual appeal.', list: ['Design & Installation', 'Glass Balustrades', 'Steel Balconies', 'Handrails'] },
+  'roofing': { title: 'Roofing Services', desc: 'Durable roofing solutions to protect your property from the elements.', list: ['New Roofs', 'Roof Repairs', 'Guttering', 'Waterproofing'] },
+  'painting': { title: 'Painting & Decorating', desc: 'Flawless finishes that bring your interior and exterior walls to life.', list: ['Interior Painting', 'Exterior Painting', 'Wallpapering', 'Surface Preparation'] },
+
+  // 20 Specific Landscaping Services
+  'landscape-gardener': { title: 'Landscape Gardener', desc: 'Our professional landscape gardening services transform your outdoor spaces into lush, functional environments. We handle everything from soil preparation and planting to ongoing maintenance, ensuring your garden thrives in Kenya\'s unique climate.' },
+  'artificial-turf': { title: 'Artificial Turf Installation', desc: 'High-quality synthetic grass solutions for residential, commercial, and recreational spaces. Our artificial turf looks natural year-round, requires minimal maintenance, saves water, and provides a durable surface perfect for families and pets.' },
+  'concrete-masonry': { title: 'Concrete Masonry', desc: 'Expert concrete work and masonry services including foundations, retaining walls, decorative pathways, and custom stonework. We use premium mixes and reinforced techniques built to withstand the test of time.' },
+  'desert-landscaping': { title: 'Desert Landscaping', desc: 'Water-wise, drought-tolerant landscaping solutions tailored for arid regions. We specialize in xeriscaping, succulent gardens, rock gardens, and efficient irrigation that minimizes water usage without compromising beauty.' },
+  'driveway-landscaping': { title: 'Driveway Landscaping', desc: 'Enhance your property\'s entrance with professional driveway landscaping. We integrate green borders, decorative stone, lighting, and drainage solutions to create an impressive and functional arrival experience.' },
+  'path-paving': { title: 'Driveway or Path Paving', desc: 'Professional paving with quality finishes. We install block paving, natural stone, concrete slabs, and resin-bound surfaces. Proper base preparation ensures your paths and driveways remain level and crack-free for years.' },
+  'garden-decorating': { title: 'Garden Decorating', desc: 'Add charm and character to your garden with our decorating services. From water features and sculptures to ambient lighting and outdoor furniture arrangements, we create spaces you\'ll love to spend time in.' },
+  'garden-design': { title: 'Garden Design', desc: 'Bespoke garden designs tailored for you. Our designers create detailed plans including 3D visualizations, plant palettes suited to your microclimate, and hardscape layouts that maximize your outdoor living potential.' },
+  'garden-drainage': { title: 'Garden Drainage', desc: 'Effective drainage solutions for waterlogging. We install French drains, soakaways, channel drains, and grading solutions to protect your property from water damage and keep your garden usable year-round.' },
+  'gardening-services': { title: 'Gardening Services', desc: 'Complete professional gardening care. Our team provides regular maintenance including pruning, weeding, mulching, pest control, and seasonal planting to keep your outdoor space looking its best.' },
+  'garden-landscaping': { title: 'Garden Landscaping', desc: 'Full-service residential landscaping from concept to completion. We manage the entire transformation including earthworks, planting, hardscaping, and irrigation systems.' },
+  'garden-levelling': { title: 'Garden Levelling', desc: 'Professional land levelling for any terrain. We use laser-guided grading equipment to create perfectly level lawns, terraces, and building pads, ensuring proper water runoff and a solid foundation.' },
+  'grading-resloping': { title: 'Grading and Resloping', desc: 'Land grading for optimal drainage and usability. We reshape your land to direct water away from structures, prevent erosion, and create the ideal topography for your landscaping plans.' },
+  'grass-seeding': { title: 'Grass Seeding', desc: 'Premium grass seeding and turf laying. We prepare the soil, select the right grass varieties for your shade/sun conditions, and install lush, weed-free lawns that establish quickly.' },
+  'green-landscaping': { title: 'Green Landscaping', desc: 'Eco-friendly sustainable planting practices. We prioritize native species, organic fertilizers, water conservation, and habitats that support local biodiversity, creating beautiful spaces that respect the environment.' },
+  'hardscaping': { title: 'Hardscaping', desc: 'Patios, walkways, walls and outdoor features built to last. We work with natural stone, brick, concrete, and timber to create functional outdoor living areas that complement your home\'s architecture.' },
+  'landscape-design': { title: 'Landscape Design', desc: 'Customised landscape design from concept to life. Our design process includes site analysis, conceptual drawings, and detailed planting plans, ensuring every element works together harmoniously.' },
+  'lawn-care': { title: 'Lawn Care', desc: 'Comprehensive lawn care and mowing services. We offer seasonal fertilisation, aeration, scarification, weed control, and professional mowing to maintain a pristine, healthy lawn.' },
+  'water-features': { title: 'Outdoor Water Feature Design', desc: 'Fountains, ponds, waterfalls and streams designed to create serene outdoor spaces. We handle the full installation including pumps, filtration, and waterproofing for low-maintenance enjoyment.' },
+  'tree-removal': { title: 'Tree Removal & Trimming', desc: 'Safe and professional tree services. Our arborists handle hazardous removals, crown thinning, shaping, and stump grinding, maintaining the health and safety of your property.' }
+};
+
+function initServiceModals() {
+  const overlay = document.getElementById('serviceModal');
+  const closeBtn = document.getElementById('modalClose');
+  if (!overlay || !closeBtn) return;
+
+  const titleEl = document.getElementById('modalTitle');
+  const descEl = document.getElementById('modalDesc');
+  const listEl = document.getElementById('modalList');
+
+  // Open Modal
+  document.querySelectorAll('[data-modal]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const key = btn.dataset.modal;
+      const data = servicesData[key];
+      if (data) {
+        titleEl.textContent = data.title;
+        descEl.textContent = data.desc;
+        
+        // Handle sub-lists for main categories
+        if (listEl) listEl.innerHTML = '';
+        if (data.list && listEl) {
+          data.list.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'modal-sublist-item';
+            div.textContent = item;
+            listEl.appendChild(div);
+          });
+        }
+        
+        overlay.classList.add('is-active');
+        document.body.classList.add('no-scroll');
+      }
+    });
+  });
+
+  // Close Modal
+  const closeModal = () => {
+    overlay.classList.remove('is-active');
+    document.body.classList.remove('no-scroll');
+  };
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('is-active')) closeModal(); });
+}
+
+
 /* ——— INIT ——— */
 document.addEventListener('DOMContentLoaded', () => {
   document.body.classList.add('no-scroll');
@@ -335,6 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFAQ();
   initServiceFilter();
   initContactForm();
+  initServiceModals();
 });
 
 // Safety net: Refresh ScrollTrigger on window load to fix any late-layout-shift issues

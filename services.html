@@ -18,6 +18,19 @@
 
   <div class="preloader"><div class="preloader__word"><span class="preloader__char">N</span><span class="preloader__char">A</span><span class="preloader__char">C</span><span class="preloader__char">H</span><span class="preloader__char">I</span><span class="preloader__char">M</span><span class="preloader__char">O</span></div><div class="preloader__line"></div><div class="preloader__sub">Contractors Ltd</div></div>
   <div class="cursor" id="cursor"></div><div class="cursor-follower" id="cursor-follower"></div>
+    <!-- Service Modal -->
+  <div class="modal-overlay" id="serviceModal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="modal-content">
+        <span class="overline" id="modalOverline">Service Detail</span>
+        <h2 id="modalTitle">Service Title</h2>
+        <p id="modalDesc">Description goes here...</p>
+        <div class="modal-sublist" id="modalList"></div> <!-- NEW: For sub-items -->
+        <a href="contact.html" class="btn btn--primary">Get a Quote <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
 
   <nav class="navbar"><div class="container navbar__inner">
     <a href="index.html" class="navbar__logo">NACHIMO<em>.</em></a>
@@ -44,100 +57,182 @@
         <p>We handle the full lifecycle of construction and maintenance. No subcontracting to unknown crews. One call, one team, one standard of excellence.</p>
       </div>
 
-      <!-- BENTO GRID LAYOUT -->
+            <!-- BENTO GRID LAYOUT (8 Main Categories) -->
       <div class="bento-grid">
         
-        <!-- 01 Plumbing (Large 2x2) -->
         <div class="bento-item bento-item--large reveal magnetic">
           <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?q=80&w=2070&auto=format&fit=crop" alt="Plumbing" class="bento-item__bg">
           <div class="bento-item__overlay"></div>
           <div class="bento-item__content">
-            <span class="overline" style="color: var(--c-secondary-light);">01 / Essential Systems</span>
-            <h3>Plumbing</h3>
-            <p>Water is the lifeblood of any building. Our licensed plumbers handle everything from new installations to leak repairs, drain unblocking, and bathroom renovations.</p>
-            <a href="contact.html" class="btn btn--sm btn--secondary">Get a Quote</a>
+            <span class="overline" style="color: var(--c-secondary-light);">01</span>
+            <h3>Plumbing Services</h3>
+            <p>Water supply, pipe fitting, sanitary installation, and leak detection.</p>
           </div>
         </div>
 
-        <!-- 02 General Maintenance (1x1) -->
         <div class="bento-item reveal magnetic">
           <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop" alt="Maintenance" class="bento-item__bg">
           <div class="bento-item__overlay"></div>
           <div class="bento-item__content">
             <span class="overline" style="color: var(--c-secondary-light);">02</span>
             <h3>General Maintenance</h3>
-            <p>From door repairs to roof patching and emergency callouts.</p>
+            <p>Renovations, wall repairs, flooring, fixture replacement.</p>
           </div>
         </div>
 
-        <!-- 03 Building (1x1) -->
-        <div class="bento-item reveal magnetic">
-          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop" alt="Building" class="bento-item__bg">
+        <div class="bento-item bento-item--tall reveal magnetic">
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=800&auto=format&fit=crop" alt="Design" class="bento-item__bg">
           <div class="bento-item__overlay"></div>
           <div class="bento-item__content">
             <span class="overline" style="color: var(--c-secondary-light);">03</span>
-            <h3>Building & Construction</h3>
-            <p>Residential and commercial builds from foundation to handover.</p>
+            <h3>Interior & Exterior Design</h3>
+            <p>Space planning, colour consultation, decorative finishes, furniture selection.</p>
           </div>
         </div>
 
-        <!-- 04 Landscaping (Tall 1x2) -->
-        <div class="bento-item bento-item--tall reveal magnetic">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800&auto=format&fit=crop" alt="Landscaping" class="bento-item__bg">
+        <div class="bento-item bento-item--wide reveal magnetic">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=2070&auto=format&fit=crop" alt="Landscaping" class="bento-item__bg">
           <div class="bento-item__overlay"></div>
           <div class="bento-item__content">
-            <span class="overline" style="color: var(--c-secondary-light);">04 / Outdoor Spaces</span>
-            <h3>Landscaping & Garden Design</h3>
-            <p>Beautiful outdoor spaces designed and installed. From garden design and sod installation to hardscaping and water features.</p>
+            <span class="overline" style="color: var(--c-secondary-light);">04 / Core Division</span>
+            <h3>Landscaping Services</h3>
+            <p>Garden design, hardscaping, irrigation systems, tree services, and water features. Click to view our full landscaping directory.</p>
           </div>
         </div>
 
-        <!-- 05 Painting (1x1) -->
+        <div class="bento-item reveal magnetic">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop" alt="Engineering" class="bento-item__bg">
+          <div class="bento-item__overlay"></div>
+          <div class="bento-item__content">
+            <span class="overline" style="color: var(--c-secondary-light);">05</span>
+            <h3>Engineering & Fabrication</h3>
+            <p>Structural works, metal fabrication, welding, custom gates.</p>
+          </div>
+        </div>
+
+        <div class="bento-item reveal magnetic">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=800&auto=format&fit=crop" alt="Staircases" class="bento-item__bg">
+          <div class="bento-item__overlay"></div>
+          <div class="bento-item__content">
+            <span class="overline" style="color: var(--c-secondary-light);">06</span>
+            <h3>Staircases & Balconies</h3>
+            <p>Glass balustrades, steel balconies, handrails.</p>
+          </div>
+        </div>
+
+        <div class="bento-item reveal magnetic">
+          <img src="https://images.unsplash.com/photo-1590644365607-1c5a0a1e9b9c?q=80&w=800&auto=format&fit=crop" alt="Roofing" class="bento-item__bg">
+          <div class="bento-item__overlay"></div>
+          <div class="bento-item__content">
+            <span class="overline" style="color: var(--c-secondary-light);">07</span>
+            <h3>Roofing Services</h3>
+            <p>New roofs, roof repairs, guttering, waterproofing.</p>
+          </div>
+        </div>
+
         <div class="bento-item reveal magnetic">
           <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=800&auto=format&fit=crop" alt="Painting" class="bento-item__bg">
           <div class="bento-item__overlay"></div>
           <div class="bento-item__content">
-            <span class="overline" style="color: var(--c-secondary-light);">05</span>
-            <h3>Painting & Decorating</h3>
-            <p>Premium finishes suited to Kenya's climate.</p>
-          </div>
-        </div>
-
-        <!-- 06 Electrical (1x1) -->
-        <div class="bento-item reveal magnetic">
-          <img src="https://images.unsplash.com/photo-1621905251189-08245270f37a?q=80&w=800&auto=format&fit=crop" alt="Electrical" class="bento-item__bg">
-          <div class="bento-item__overlay"></div>
-          <div class="bento-item__content">
-            <span class="overline" style="color: var(--c-secondary-light);">06</span>
-            <h3>Electrical Works</h3>
-            <p>Certified installations, wiring, and safety compliance.</p>
-          </div>
-        </div>
-
-        <!-- 07 Cleaning (Wide 2x1) -->
-        <div class="bento-item bento-item--wide reveal magnetic">
-          <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop" alt="Cleaning" class="bento-item__bg">
-          <div class="bento-item__overlay"></div>
-          <div class="bento-item__content">
-            <span class="overline" style="color: var(--c-secondary-light);">07 / Spotless Spaces</span>
-            <h3>Cleaning Services</h3>
-            <p>Professional cleaning for homes, offices, and commercial premises. Post-construction cleaning is our speciality.</p>
-          </div>
-        </div>
-
-        <!-- 08 Civil Engineering (1x1) -->
-        <div class="bento-item reveal magnetic">
-          <img src="https://images.unsplash.com/photo-1590644365607-1c5a0a1e9b9c?q=80&w=800&auto=format&fit=crop" alt="Civil Engineering" class="bento-item__bg">
-          <div class="bento-item__overlay"></div>
-          <div class="bento-item__content">
             <span class="overline" style="color: var(--c-secondary-light);">08</span>
-            <h3>Civil Engineering</h3>
-            <p>Roads, drainage, and structural engineering.</p>
+            <h3>Painting & Decorating</h3>
+            <p>Interior/exterior painting, surface preparation, finishes.</p>
           </div>
         </div>
 
       </div>
-    </div>
+
+      <!-- SPECIFIC LANDSCAPING SERVICES DIRECTORY -->
+      <div style="margin-top: 6rem;">
+        <div class="sh sh--center sh--wide clip-reveal">
+          <span class="overline">Landscaping Directory</span>
+          <h2>20 Specialist <span class="text-accent">Landscaping</span> Services</h2>
+          <p>Explore our full range of dedicated outdoor services</p>
+        </div>
+
+        <div class="landscape-grid">
+          <div class="landscape-card" data-modal="landscape-gardener">
+            <h4>Landscape Gardener</h4>
+            <p>Professional landscape gardening services.</p>
+          </div>
+          <div class="landscape-card" data-modal="artificial-turf">
+            <h4>Artificial Turf Installation</h4>
+            <p>High-quality synthetic grass for any space.</p>
+          </div>
+          <div class="landscape-card" data-modal="concrete-masonry">
+            <h4>Concrete Masonry</h4>
+            <p>Expert concrete work and masonry.</p>
+          </div>
+          <div class="landscape-card" data-modal="desert-landscaping">
+            <h4>Desert Landscaping</h4>
+            <p>Water-wise drought-tolerant landscaping.</p>
+          </div>
+          <div class="landscape-card" data-modal="driveway-landscaping">
+            <h4>Driveway Landscaping</h4>
+            <p>Enhance your driveway with greenery.</p>
+          </div>
+          <div class="landscape-card" data-modal="path-paving">
+            <h4>Driveway or Path Paving</h4>
+            <p>Professional paving with quality finishes.</p>
+          </div>
+          <div class="landscape-card" data-modal="garden-decorating">
+            <h4>Garden Decorating</h4>
+            <p>Add charm and character with garden decor.</p>
+          </div>
+          <div class="landscape-card" data-modal="garden-design">
+            <h4>Garden Design</h4>
+            <p>Bespoke garden designs tailored for you.</p>
+          </div>
+          <div class="landscape-card" data-modal="garden-drainage">
+            <h4>Garden Drainage</h4>
+            <p>Effective drainage solutions for waterlogging.</p>
+          </div>
+          <div class="landscape-card" data-modal="gardening-services">
+            <h4>Gardening Services</h4>
+            <p>Complete professional gardening care.</p>
+          </div>
+          <div class="landscape-card" data-modal="garden-landscaping">
+            <h4>Garden Landscaping</h4>
+            <p>Full-service residential landscaping.</p>
+          </div>
+          <div class="landscape-card" data-modal="garden-levelling">
+            <h4>Garden Levelling</h4>
+            <p>Professional land levelling for any terrain.</p>
+          </div>
+          <div class="landscape-card" data-modal="grading-resloping">
+            <h4>Grading and Resloping</h4>
+            <p>Land grading for optimal drainage.</p>
+          </div>
+          <div class="landscape-card" data-modal="grass-seeding">
+            <h4>Grass Seeding</h4>
+            <p>Premium grass seeding and turf laying.</p>
+          </div>
+          <div class="landscape-card" data-modal="green-landscaping">
+            <h4>Green Landscaping</h4>
+            <p>Eco-friendly sustainable planting practices.</p>
+          </div>
+          <div class="landscape-card" data-modal="hardscaping">
+            <h4>Hardscaping</h4>
+            <p>Patios, walkways, walls and outdoor features.</p>
+          </div>
+          <div class="landscape-card" data-modal="landscape-design">
+            <h4>Landscape Design</h4>
+            <p>Customised landscape design from concept to life.</p>
+          </div>
+          <div class="landscape-card" data-modal="lawn-care">
+            <h4>Lawn Care</h4>
+            <p>Comprehensive lawn care and mowing services.</p>
+          </div>
+          <div class="landscape-card" data-modal="water-features">
+            <h4>Outdoor Water Feature Design</h4>
+            <p>Fountains, ponds, waterfalls and streams.</p>
+          </div>
+          <div class="landscape-card" data-modal="tree-removal">
+            <h4>Tree Removal & Trimming</h4>
+            <p>Safe and professional tree services.</p>
+          </div>
+        </div>
+      </div>
   </section>
 
   <section class="section" style="padding-bottom:0;">
