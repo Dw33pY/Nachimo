@@ -3,261 +3,252 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NACHIMO CONTRACTORS LTD — Professional building, landscaping, plumbing, electrical, and maintenance services in Nairobi, Kenya. Quality workmanship since 2015.">
-  <meta property="og:title" content="NACHIMO CONTRACTORS LTD — Building Excellence in Kenya">
-  <meta property="og:description" content="Comprehensive contracting services across Kenya. Building, plumbing, electrical, landscaping, painting, cleaning, civil engineering, and maintenance.">
-  <meta property="og:type" content="website">
-  <title>NACHIMO CONTRACTORS LTD — Building Excellence in Kenya</title>
+  <meta name="description" content="NACHIMO CONTRACTORS LTD — Page not found.">
+  <title>404 — Page Not Found | NACHIMO CONTRACTORS LTD</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <style>
+    :root {
+      --c-dark: #0a0a0a;
+      --c-light: #f5f5f5;
+      --c-accent: #c9a84c; /* Gold accent based on previous styling */
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--c-dark);
+      color: var(--c-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      mix-blend-mode: difference;
+    }
+
+    .navbar__logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--c-light);
+    }
+
+    .navbar__logo em {
+      color: var(--c-accent);
+      font-style: normal;
+    }
+
+    /* Main 404 Content */
+    .error-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle background texture */
+    .error-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .error-code {
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 20vw, 16rem);
+      font-weight: 800;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px rgba(245, 245, 245, 0.15);
+      position: relative;
+      z-index: 1;
+      user-select: none;
+    }
+
+    .error-code::after {
+      content: '404';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--c-accent);
+      -webkit-text-stroke: 0;
+      opacity: 0.8;
+      clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    }
+
+    .error-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      margin-top: -2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-text {
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(245, 245, 245, 0.7);
+      max-width: 50ch;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .btn--secondary {
+      background-color: var(--c-accent);
+      color: var(--c-dark);
+      border-color: var(--c-accent);
+    }
+
+    .btn--secondary:hover {
+      background-color: transparent;
+      color: var(--c-accent);
+    }
+
+    .btn--secondary:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn--outline {
+      background-color: transparent;
+      color: var(--c-light);
+      border-color: rgba(245, 245, 245, 0.3);
+    }
+
+    .btn--outline:hover {
+      border-color: var(--c-light);
+      background-color: rgba(245, 245, 245, 0.05);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid rgba(245, 245, 245, 0.1);
+      font-size: 0.85rem;
+      color: rgba(245, 245, 245, 0.4);
+    }
+
+    .footer a {
+      color: var(--c-accent);
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover {
+      color: var(--c-light);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .error-code {
+        -webkit-text-stroke: 1px rgba(245, 245, 245, 0.15);
+      }
+      .error-title {
+        margin-top: -1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="preloader__word">
-      <span class="preloader__char">N</span>
-      <span class="preloader__char">A</span>
-      <span class="preloader__char">C</span>
-      <span class="preloader__char">H</span>
-      <span class="preloader__char">I</span>
-      <span class="preloader__char">M</span>
-      <span class="preloader__char">O</span>
-    </div>
-    <div class="preloader__line"></div>
-    <div class="preloader__sub">Contractors Ltd</div>
-  </div>
-
-  <!-- Custom Cursor -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-follower" id="cursor-follower"></div>
-
-    <!-- Service Modal -->
-  <div class="modal-overlay" id="serviceModal">
-    <div class="modal-box">
-      <button class="modal-close" id="modalClose"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-      <div class="modal-content">
-        <span class="overline" id="modalOverline">Service Detail</span>
-        <h2 id="modalTitle">Service Title</h2>
-        <p id="modalDesc">Description goes here...</p>
-        <div class="modal-sublist" id="modalList"></div> <!-- NEW: For sub-items -->
-        <a href="contact.html" class="btn btn--primary">Get a Quote <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-      </div>
-    </div>
-  </div>
-
   <!-- Navigation -->
   <nav class="navbar">
-    <div class="container navbar__inner">
-      <a href="index.html" class="navbar__logo">NACHIMO<em>.</em></a>
-      <div class="navbar__links">
-        <a href="index.html" class="navbar__link is-active">Home</a>
-        <a href="about.html" class="navbar__link">About</a>
-        <a href="services.html" class="navbar__link">Services</a>
-        <a href="contact.html" class="navbar__link">Contact</a>
-        <a href="tel:+254708832478" class="btn btn--secondary btn--lg navbar__cta">Call Now</a>
-      </div>
-      <button class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-    </div>
+    <a href="index.html" class="navbar__logo">NACHIMO<em>.</em></a>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <a href="index.html" class="mobile-menu__link">Home</a>
-    <a href="about.html" class="mobile-menu__link">About</a>
-    <a href="services.html" class="mobile-menu__link">Services</a>
-    <a href="contact.html" class="mobile-menu__link">Contact</a>
-    <a href="tel:+254708832478" class="btn btn--secondary btn--lg mobile-menu__cta">Call Now</a>
-    <div class="mobile-menu__info">
-      <p><a href="tel:+254708832478">+254 708 832 478</a></p>
-      <p><a href="mailto:info@bplandscapes.co.ke">info@bplandscapes.co.ke</a></p>
+  <!-- 404 Content -->
+  <main class="error-container">
+    <div class="error-code" aria-hidden="true">404</div>
+    <h1 class="error-title">Page Not Found</h1>
+    <p class="error-text">It looks like this page has been moved, deleted, or never existed. Let's get you back to building excellence.</p>
+    <div class="error-actions">
+      <a href="index.html" class="btn btn--secondary">
+        Back to Home 
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="contact.html" class="btn btn--outline">Contact Support</a>
     </div>
-  </div>
+  </main>
 
-   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero__bg"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" alt="NACHIMO construction" loading="eager"></div>
-    <div class="hero__overlay"></div>
-    <div class="container hero__content">
-      <span class="hero__overline">Building · Maintaining · Designing · Engineering</span>
-      <h1 class="hero__title">
-        <span class="line"><span class="line-inner">Building Excellence</span></span>
-        <span class="line"><span class="line-inner">From the Ground Up</span></span>
-      </h1>
-      <p class="hero__desc">NACHIMO CONTRACTORS LTD delivers comprehensive construction, landscaping, plumbing, and maintenance services across Kenya.</p>
-      <div class="hero__actions">
-        <a href="contact.html" class="btn btn--secondary btn--lg magnetic">Get Free Quote <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-        <a href="services.html" class="btn btn--outline btn--lg magnetic">Our Services</a>
-      </div>
-    </div>
-    <div class="hero__badge">
-      <div><div class="hero__badge-num">10+</div><div class="hero__badge-text">Years Experience</div></div>
-    </div>
-    <div class="hero__scroll"><span>Scroll</span><div class="hero__scroll-line"></div></div>
-  </section>
-
-  <!-- About Split -->
-  <section class="section">
-    <div class="container">
-      <div class="about-split">
-        <div class="about-split__image reveal-left">
-          <div class="img-reveal"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop" alt="NACHIMO team" loading="lazy"><div class="img-reveal__cover"></div></div>
-          <div class="about-split__badge"><strong>2015</strong><span>Established</span></div>
-        </div>
-        <div class="reveal-right">
-          <span class="overline">About NACHIMO</span>
-          <h2>Professional Contracting <span class="text-accent">& Construction</span></h2>
-          <p>NACHIMO CONTRACTORS LTD is a fully integrated contracting company based in Nairobi, Kenya. We bring together skilled professionals across every trade — building and construction, plumbing, electrical works, landscaping and garden design, painting and decorating, cleaning services, general maintenance, and civil engineering.</p>
-          <p>From residential renovations to large-scale commercial projects, we deliver quality workmanship with reliable service at affordable prices. One company, one point of contact, one standard of excellence across every service we provide.</p>
-          <div style="margin-top:2rem;display:flex;flex-wrap:wrap;gap:1rem;">
-            <a href="about.html" class="btn btn--primary magnetic">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-            <a href="contact.html" class="btn btn--outline-dark magnetic">Get Free Quote</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<!-- Services Grid (8 Main Categories) -->
-  <section class="section section--dark">
-    <div class="container">
-      <div class="sh sh--center sh--wide clip-reveal">
-        <span class="overline">Our Services</span>
-        <h2>Comprehensive Contracting <span class="text-accent">Solutions</span></h2>
-        <p>Eight integrated service divisions, one dedicated team</p>
-      </div>
-      
-      <div class="grid grid--4" data-stagger>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 12H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 8h12"/><path d="M11 12v6a2 2 0 0 0 4 0v-6"/></svg></div>
-          <h3 class="service-card__title">Plumbing Services</h3>
-          <p class="service-card__text">Water supply, pipe fitting, sanitary installation.</p>
-          <button class="service-card__link" data-modal="plumbing">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-          <h3 class="service-card__title">General Maintenance</h3>
-          <p class="service-card__text">Renovations, wall repairs, flooring, fixture replacement.</p>
-          <button class="service-card__link" data-modal="maintenance">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-          <h3 class="service-card__title">Interior & Exterior Design</h3>
-          <p class="service-card__text">Space planning, colour consultation, decorative finishes.</p>
-          <button class="service-card__link" data-modal="int-ext-design">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/></svg></div>
-          <h3 class="service-card__title">Landscaping Services</h3>
-          <p class="service-card__text">Garden design, hardscaping, irrigation, tree services.</p>
-          <button class="service-card__link" data-modal="landscaping-main">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/></svg></div>
-          <h3 class="service-card__title">Engineering & Fabrication</h3>
-          <p class="service-card__text">Structural works, metal fabrication, welding, custom gates.</p>
-          <button class="service-card__link" data-modal="engineering">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-6h6v6"/></svg></div>
-          <h3 class="service-card__title">Staircases & Balconies</h3>
-          <p class="service-card__text">Glass balustrades, steel balconies, handrails.</p>
-          <button class="service-card__link" data-modal="staircases">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m21 12-9-9-9 9"/><path d="M3 17v4h18v-4"/></svg></div>
-          <h3 class="service-card__title">Roofing Services</h3>
-          <p class="service-card__text">New roofs, roof repairs, guttering, waterproofing.</p>
-          <button class="service-card__link" data-modal="roofing">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-        <div class="service-card magnetic">
-          <div class="service-card__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3Z"/><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7"/></svg></div>
-          <h3 class="service-card__title">Painting & Decorating</h3>
-          <p class="service-card__text">Interior/exterior painting, surface preparation, finishes.</p>
-          <button class="service-card__link" data-modal="painting">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Stats Section -->
-  <section class="section">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat reveal"><div class="stat__number" data-count="500" data-suffix="+">0</div><div class="stat__label">Projects Completed</div></div>
-        <div class="stat reveal"><div class="stat__number" data-count="10" data-suffix="+">0</div><div class="stat__label">Years Experience</div></div>
-        <div class="stat reveal"><div class="stat__number" data-count="20" data-suffix="+">0</div><div class="stat__label">Expert Tradespeople</div></div>
-        <div class="stat reveal"><div class="stat__number" data-count="18" data-suffix="">0</div><div class="stat__label">Counties Served</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Banner -->
-  <section class="section" style="padding-bottom:0;">
-    <div class="container">
-      <div class="cta-banner reveal">
-        <h2 class="cta-banner__title">Let's Build Something Great Together</h2>
-        <p class="cta-banner__text">Contact us for a free consultation or quote. From plumbing to civil engineering — we've got you covered.</p>
-        <div class="cta-banner__actions">
-          <a href="contact.html" class="btn btn--secondary btn--lg magnetic">Get Free Quote <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="tel:+254708832478" class="btn btn--outline btn--lg magnetic">Call +254 708 832 478</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer" style="margin-top:var(--sp-2xl);">
-    <div class="container">
-      <div class="footer__top">
-        <div>
-          <div class="footer__logo">NACHIMO<em>.</em></div>
-          <p class="footer__brand-desc">Building · Maintaining · Designing · Landscaping · Engineering. Comprehensive contracting services across Kenya.</p>
-          <div class="footer__socials">
-            <a href="https://facebook.com/NachimoContractors" class="footer__social" aria-label="Facebook" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="#" class="footer__social" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-            <a href="#" class="footer__social" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-          </div>
-        </div>
-        <div>
-          <h4 class="footer__heading">Quick Links</h4>
-          <div class="footer__links">
-            <a href="index.html" class="footer__link">Home</a>
-            <a href="about.html" class="footer__link">About Us</a>
-            <a href="services.html" class="footer__link">Services</a>
-            <a href="contact.html" class="footer__link">Contact</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="footer__heading">Our Services</h4>
-          <div class="footer__links">
-            <a href="services.html" class="footer__link">Plumbing</a>
-            <a href="services.html" class="footer__link">Building & Construction</a>
-            <a href="services.html" class="footer__link">Landscaping</a>
-            <a href="services.html" class="footer__link">Electrical Works</a>
-            <a href="services.html" class="footer__link">Civil Engineering</a>
-          </div>
-        </div>
-        <div>
-          <h4 class="footer__heading">Contact Info</h4>
-          <div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+254 708 832 478</span></div>
-          <div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>info@bplandscapes.co.ke</span></div>
-          <div class="footer__contact-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Mon–Sat: 8AM–6PM<br>Sun: 10AM–4PM</span></div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span>&copy; 2026 NACHIMO CONTRACTORS LTD. All rights reserved.</span>
-        <span class="footer__credit">Engineered by <a href="https://dw33py.netlify.app" target="_blank" rel="noopener">Dw33pY</a></span>
-      </div>
-    </div>
+  <!-- Minimal Footer -->
+  <footer class="footer">
+    <span>&copy; 2026 NACHIMO CONTRACTORS LTD. All rights reserved.</span>
   </footer>
 
-  <button class="back-to-top" aria-label="Back to top"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>
-  <a href="https://wa.me/254708832478?text=Hi%20NACHIMO%2C%20I%27d%20like%20to%20enquire%20about%20your%20services." class="whatsapp-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><span class="whatsapp-btn__pulse"></span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 </body>
 </html>
