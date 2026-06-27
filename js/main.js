@@ -64,7 +64,7 @@ function initPreloader() {
   const preloader = document.querySelector('.preloader');
   if (!preloader) { document.body.classList.remove('no-scroll'); initPageAnimations(); return; }
 
-  const chars = preloader.querySelectorAll('.preloader__char');
+  const logo = preloader.querySelector('.preloader__logo');
   const line = preloader.querySelector('.preloader__line');
   const sub = preloader.querySelector('.preloader__sub');
 
@@ -78,8 +78,8 @@ function initPreloader() {
     }
   });
 
-  tl.to(chars, { y: 0, duration: 0.6, stagger: 0.06, ease: 'power3.out' })
-    .to(line, { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, '-=0.2')
+  tl.to(logo, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+    .to(line, { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, '-=0.3')
     .to(sub, { opacity: 1, duration: 0.4 }, '-=0.2')
     .to({}, { duration: 0.6 });
 }
