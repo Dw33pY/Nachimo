@@ -28,7 +28,7 @@ function initCursor() {
   });
 
   function bindCursorHovers() {
-    const targets = document.querySelectorAll('a, button, .service-card, .team-card, .bento-item, .contact-info-card, input, textarea, select');
+    const targets = document.querySelectorAll('a, button, .service-card, .team-card, .bento-item, .contact-info-card, input, textarea, select, [data-modal]');
     targets.forEach(el => {
       el.addEventListener('mouseenter', () => {
         gsap.to(cursor, { scale: 0.5, duration: 0.3 });
@@ -62,26 +62,39 @@ function initMagnetic() {
 /* ——— PRELOADER ——— */
 function initPreloader() {
   const preloader = document.querySelector('.preloader');
-  if (!preloader) { document.body.classList.remove('no-scroll'); initPageAnimations(); return; }
-
+  if (!preloader) {
+    document.body.classList.remove('no-scroll');
+    initPageAnimations();
+    return;
+  }
+  
   const logo = preloader.querySelector('.preloader__logo');
   const line = preloader.querySelector('.preloader__line');
   const sub = preloader.querySelector('.preloader__sub');
-
+  
+  // FIX: Added null checks to prevent GSAP from crashing if elements are missing/commented out
+  if (logo) gsap.set(logo, { opacity: 0, y: -20 });
+  if (sub) gsap.set(sub, { opacity: 0 });
+  
   const tl = gsap.timeline({
     onComplete: () => {
-      gsap.to(preloader, { opacity: 0, duration: 0.5, onComplete: () => {
-        preloader.classList.add('is-hidden');
-        document.body.classList.remove('no-scroll');
-        initPageAnimations();
-      }});
+      gsap.to(preloader, {
+        opacity: 0,
+        duration: 0.5,
+        onComplete: () => {
+          preloader.classList.add('is-hidden');
+          document.body.classList.remove('no-scroll');
+          initPageAnimations();
+        }
+      });
     }
   });
-
-  tl.to(logo, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
-    .to(line, { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, '-=0.3')
-    .to(sub, { opacity: 1, duration: 0.4 }, '-=0.2')
-    .to({}, { duration: 0.6 });
+  
+  // FIX: Only add tweens if the elements exist
+  if (logo) tl.to(logo, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
+  if (line) tl.to(line, { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, '-=0.3');
+  if (sub) tl.to(sub, { opacity: 1, duration: 0.4 }, '-=0.2');
+  tl.to({}, { duration: 0.6 }); // Filler to keep timeline running
 }
 
 /* ——— PAGE ANIMATIONS ——— */
@@ -101,7 +114,7 @@ function initHeroAnimations() {
   if (hero) {
     const tl = gsap.timeline({ delay: 0.1 });
     const overline = hero.querySelector('.hero__overline');
-    if (overline) tl.to(overline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+    if (overline) tl.to(overline, { opacity: 1, duration: 0.6, ease: 'power2.out' });
     const lines = hero.querySelectorAll('.hero__title .line-inner');
     if (lines.length) tl.to(lines, { y: 0, duration: 0.9, stagger: 0.12, ease: 'power3.out' }, '-=0.25');
     const desc = hero.querySelector('.hero__desc');
@@ -113,14 +126,18 @@ function initHeroAnimations() {
     const bg = hero.querySelector('.hero__bg img');
     if (bg) gsap.to(bg, { yPercent: 15, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
   }
-
+  
   const pageHero = document.querySelector('.page-hero');
   if (pageHero) {
-    const tl = gsap.timeline({ delay: 0.1 });
     const lines = pageHero.querySelectorAll('.page-hero__title .line-inner');
-    if (lines.length) tl.to(lines, { y: 0, duration: 0.85, stagger: 0.12, ease: 'power3.out' });
     const bc = pageHero.querySelector('.page-hero__breadcrumb');
-    if (bc) tl.from(bc, { opacity: 0, y: 10, duration: 0.5, ease: 'power2.out' }, '-=0.35');
+    
+    if (lines.length) gsap.set(lines, { y: 110, opacity: 0 });
+    if (bc) gsap.set(bc, { opacity: 0, y: 10 });
+    
+    const tl = gsap.timeline();
+    if (lines.length) tl.to(lines, { y: 0, opacity: 1, duration: 0.85, stagger: 0.12, ease: 'power3.out' });
+    if (bc) tl.fromTo(bc, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.35');
   }
 }
 
@@ -138,11 +155,15 @@ function initScrollReveals() {
     });
   });
 
+  // FIX: Added opacity: 1 to the 'to' state so the text becomes visible again
   document.querySelectorAll('.clip-reveal').forEach(el => {
-    gsap.fromTo(el, { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } });
+    gsap.fromTo(el, 
+      { clipPath: 'inset(100% 0 0 0)', opacity: 0 }, 
+      { clipPath: 'inset(0% 0 0 0)', opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', toggleActions: 'play none none none' } }
+    );
   });
 
-  // Stagger groups (Fixed to ensure items don't get stuck invisible)
+  // Stagger groups
   document.querySelectorAll('[data-stagger]').forEach(group => {
     gsap.fromTo(group.children, 
       { opacity: 0, y: 40 }, 
@@ -325,7 +346,6 @@ function showToast(msg) {
 
 /* ——— SERVICE MODAL DATA & LOGIC ——— */
 const servicesData = {
-  // 8 Main Categories from Image
   'plumbing': { title: 'Plumbing Services', desc: 'Comprehensive plumbing solutions for residential and commercial properties. We ensure reliable water systems and faultless installations.', list: ['Water Supply Systems', 'Pipe Fitting', 'Sanitary Installation', 'Leak Detection'] },
   'maintenance': { title: 'General Maintenance', desc: 'Property upkeep and rapid repairs to keep your premises in top condition year-round.', list: ['Renovations & Upgrades', 'Wall Repairs', 'Flooring', 'Fixture Replacement'] },
   'int-ext-design': { title: 'Interior & Exterior Design', desc: 'Elevate your spaces with our bespoke design services, blending aesthetics with functionality.', list: ['Space Planning', 'Colour Consultation', 'Decorative Finishes', 'Furniture Selection'] },
@@ -334,8 +354,6 @@ const servicesData = {
   'staircases': { title: 'Staircases, Balustrades & Balconies', desc: 'Premium installations that combine safety with striking visual appeal.', list: ['Design & Installation', 'Glass Balustrades', 'Steel Balconies', 'Handrails'] },
   'roofing': { title: 'Roofing Services', desc: 'Durable roofing solutions to protect your property from the elements.', list: ['New Roofs', 'Roof Repairs', 'Guttering', 'Waterproofing'] },
   'painting': { title: 'Painting & Decorating', desc: 'Flawless finishes that bring your interior and exterior walls to life.', list: ['Interior Painting', 'Exterior Painting', 'Wallpapering', 'Surface Preparation'] },
-
-  // 20 Specific Landscaping Services
   'landscape-gardener': { title: 'Landscape Gardener', desc: 'Our professional landscape gardening services transform your outdoor spaces into lush, functional environments. We handle everything from soil preparation and planting to ongoing maintenance, ensuring your garden thrives in Kenya\'s unique climate.' },
   'artificial-turf': { title: 'Artificial Turf Installation', desc: 'High-quality synthetic grass solutions for residential, commercial, and recreational spaces. Our artificial turf looks natural year-round, requires minimal maintenance, saves water, and provides a durable surface perfect for families and pets.' },
   'concrete-masonry': { title: 'Concrete Masonry', desc: 'Expert concrete work and masonry services including foundations, retaining walls, decorative pathways, and custom stonework. We use premium mixes and reinforced techniques built to withstand the test of time.' },
@@ -367,8 +385,10 @@ function initServiceModals() {
   const descEl = document.getElementById('modalDesc');
   const listEl = document.getElementById('modalList');
 
-  // Open Modal
   document.querySelectorAll('[data-modal]').forEach(btn => {
+    // FIX: Ensure cursor pointer is applied to all clickable service items
+    btn.style.cursor = 'pointer';
+    
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const key = btn.dataset.modal;
@@ -377,7 +397,6 @@ function initServiceModals() {
         titleEl.textContent = data.title;
         descEl.textContent = data.desc;
         
-        // Handle sub-lists for main categories
         if (listEl) listEl.innerHTML = '';
         if (data.list && listEl) {
           data.list.forEach(item => {
@@ -394,7 +413,6 @@ function initServiceModals() {
     });
   });
 
-  // Close Modal
   const closeModal = () => {
     overlay.classList.remove('is-active');
     document.body.classList.remove('no-scroll');
