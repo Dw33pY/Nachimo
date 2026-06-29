@@ -72,7 +72,6 @@ function initPreloader() {
   const line = preloader.querySelector('.preloader__line');
   const sub = preloader.querySelector('.preloader__sub');
   
-  // FIX: Added null checks to prevent GSAP from crashing if elements are missing/commented out
   if (logo) gsap.set(logo, { opacity: 0, y: -20 });
   if (sub) gsap.set(sub, { opacity: 0 });
   
@@ -90,11 +89,10 @@ function initPreloader() {
     }
   });
   
-  // FIX: Only add tweens if the elements exist
   if (logo) tl.to(logo, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' });
   if (line) tl.to(line, { scaleX: 1, duration: 0.5, ease: 'power2.inOut' }, '-=0.3');
   if (sub) tl.to(sub, { opacity: 1, duration: 0.4 }, '-=0.2');
-  tl.to({}, { duration: 0.6 }); // Filler to keep timeline running
+  tl.to({}, { duration: 0.6 }); 
 }
 
 /* ——— PAGE ANIMATIONS ——— */
@@ -104,7 +102,6 @@ function initPageAnimations() {
   initCounters();
   initImageReveals();
   initMagnetic();
-  // Crucial: Refresh ScrollTrigger after all DOM manipulations and inits
   setTimeout(() => ScrollTrigger.refresh(), 100);
 }
 
@@ -155,7 +152,6 @@ function initScrollReveals() {
     });
   });
 
-  // FIX: Added opacity: 1 to the 'to' state so the text becomes visible again
   document.querySelectorAll('.clip-reveal').forEach(el => {
     gsap.fromTo(el, 
       { clipPath: 'inset(100% 0 0 0)', opacity: 0 }, 
@@ -163,7 +159,6 @@ function initScrollReveals() {
     );
   });
 
-  // Stagger groups
   document.querySelectorAll('[data-stagger]').forEach(group => {
     gsap.fromTo(group.children, 
       { opacity: 0, y: 40 }, 
@@ -346,14 +341,229 @@ function showToast(msg) {
 
 /* ——— SERVICE MODAL DATA & LOGIC ——— */
 const servicesData = {
-  'plumbing': { title: 'Plumbing Services', desc: 'Comprehensive plumbing solutions for residential and commercial properties. We ensure reliable water systems and faultless installations.', list: ['Water Supply Systems', 'Pipe Fitting', 'Sanitary Installation', 'Leak Detection'] },
-  'maintenance': { title: 'General Maintenance', desc: 'Property upkeep and rapid repairs to keep your premises in top condition year-round.', list: ['Renovations & Upgrades', 'Wall Repairs', 'Flooring', 'Fixture Replacement'] },
-  'int-ext-design': { title: 'Interior & Exterior Design', desc: 'Elevate your spaces with our bespoke design services, blending aesthetics with functionality.', list: ['Space Planning', 'Colour Consultation', 'Decorative Finishes', 'Furniture Selection'] },
-  'landscaping-main': { title: 'Landscaping Services', desc: 'Transform your outdoor spaces with our comprehensive landscaping solutions, from concept to completion.', list: ['Garden Design', 'Hardscaping', 'Irrigation Systems', 'Tree Services', 'Water Features', 'Artificial Turf', 'Desert Landscaping', 'Garden Drainage'] },
-  'engineering': { title: 'Engineering & Fabrication', desc: 'Robust structural solutions and custom metalwork built to last.', list: ['Structural Works', 'Metal Fabrication', 'Welding Services', 'Custom Gates'] },
-  'staircases': { title: 'Staircases, Balustrades & Balconies', desc: 'Premium installations that combine safety with striking visual appeal.', list: ['Design & Installation', 'Glass Balustrades', 'Steel Balconies', 'Handrails'] },
-  'roofing': { title: 'Roofing Services', desc: 'Durable roofing solutions to protect your property from the elements.', list: ['New Roofs', 'Roof Repairs', 'Guttering', 'Waterproofing'] },
-  'painting': { title: 'Painting & Decorating', desc: 'Flawless finishes that bring your interior and exterior walls to life.', list: ['Interior Painting', 'Exterior Painting', 'Wallpapering', 'Surface Preparation'] },
+  'plumbing': { 
+    title: 'Plumbing Services', 
+    desc: 'Comprehensive plumbing solutions for residential, commercial and industrial properties. We deliver reliable water systems, professional installations, repairs and preventive maintenance to ensure your plumbing operates efficiently and safely.', 
+    list: [
+      'Water supply system installation',
+      'Hot and cold water piping installation',
+      'Drainage and sewer line installation',
+      'Plumbing design and consultation',
+      'Bathroom plumbing installation and renovation',
+      'Kitchen plumbing installation',
+      'Toilet (WC) installation and repairs',
+      'Wash basin installation',
+      'Shower and bathtub installation',
+      'Kitchen sink installation',
+      'Water tank installation and connections',
+      'Water pump installation and maintenance',
+      'Borehole plumbing connections',
+      'Pipe fitting and replacement',
+      'Leak detection and repair',
+      'Burst pipe repairs',
+      'Blocked drain and sewer unclogging',
+      'Manhole construction and maintenance',
+      'Gutter and downpipe installation',
+      'Rainwater harvesting systems'
+    ] 
+  },
+  'maintenance': { 
+    title: 'General Maintenance', 
+    desc: 'Property upkeep and rapid repair solutions for residential, commercial, and industrial properties.', 
+    list: [
+      'Preventive building maintenance',
+      'Corrective and emergency maintenance',
+      'Residential property maintenance',
+      'Commercial property maintenance',
+      'Industrial facility maintenance',
+      'Office maintenance services',
+      'Building repairs and restoration',
+      'Minor construction and repair works',
+      'Wall repairs and patching',
+      'Ceiling repairs and replacement',
+      'Floor repairs and maintenance',
+      'Door installation, repairs and adjustments',
+      'Window installation and repairs',
+      'Lock replacement and repairs',
+      'Roofing repairs and maintenance',
+      'Gutter cleaning and repairs',
+      'Waterproofing services',
+      'Painting and touch up works',
+      'Plumbing maintenance and repairs'
+    ] 
+  },
+  'int-ext-design': { 
+    title: 'Interior & Exterior Design', 
+    desc: 'We create functional, stylish and sustainable interior and exterior spaces tailored to your vision. Our experienced team delivers quality results that enhance the beauty, comfort and value of every property.', 
+    list: [
+      'Space planning and layout design',
+      'Residential interior design',
+      'Commercial office interior design',
+      'Retail shop and showroom design',
+      'Restaurant, café and hospitality interiors',
+      'Kitchen design and remodeling',
+      'Bathroom design and renovation',
+      'Bedroom and living room makeovers',
+      'Ceiling design (Gypsum & PVC)',
+      'Wall paneling and feature walls',
+      'Decorative painting and textured finishes',
+      'Flooring design (Tiles, Vinyl, Laminate, Epoxy & Hardwood)',
+      'Lighting design and installation',
+      'Custom cabinetry and wardrobes',
+      'TV units and entertainment walls',
+      'Office partitions (Glass, Aluminum & Gypsum)',
+      'Furniture selection and space styling',
+      'Window treatments (Blinds, Curtains & Shades)',
+      '3D interior visualization and rendering',
+      'Interior renovation and remodeling',
+      'Building façade design',
+      'Exterior cladding (Stone, Wood & Composite)',
+      'Roofing design enhancements',
+      'Drainage and stormwater planning',
+      'Complete exterior renovations'
+    ] 
+  },
+  'landscaping-main': { 
+    title: 'Landscaping Services', 
+    desc: 'We provide complete landscaping solutions that enhance the beauty, functionality and value of your outdoor spaces. We combine quality, sustainable practices and attention to detail to create outdoor environments that are attractive, durable and easy to maintain.', 
+    list: [
+      'Garden Design & Planning',
+      'Landscape Installation',
+      'Garden Maintenance',
+      'Lawn Installation & Maintenance',
+      'Artificial Turf Installation',
+      'Hardscaping (Paving, Pathways & Patios)',
+      'Cabro & Driveway Installation',
+      'Irrigation & Sprinkler Systems',
+      'Tree Planting & Transplanting',
+      'Tree Pruning, Trimming & Removal',
+      'Hedge Trimming & Shaping',
+      'Flower Bed Design & Planting',
+      'Ornamental Plant Supply & Installation',
+      'Water Features (Fountains, Ponds & Waterfalls)',
+      'Retaining Walls',
+      'Outdoor Lighting Installation',
+      'Pergolas & Gazebos',
+      'Decking Installation',
+      'Garden Drainage Solutions',
+      'Erosion Control & Soil Stabilization',
+      'Mulching & Soil Improvement',
+      'Rock & Stone Landscaping',
+      'Desert & Low Maintenance Landscaping',
+      'Vertical Gardens & Green Walls',
+      'Rooftop & Balcony Gardens',
+      'Outdoor Seating & Recreational Areas',
+      'Commercial Landscape Development',
+      'Residential Landscape Design',
+      'Landscape Renovation & Restoration',
+      'Seasonal Planting & Garden Refresh',
+      'Landscape Consultation & 3D Design'
+    ] 
+  },
+  'engineering': { 
+    title: 'Engineering & Fabrication', 
+    desc: 'Robust structural solutions and custom metalwork built to last. Our certified engineers and fabricators deliver precision structural works, welding, and bespoke metal creations.', 
+    list: [
+      'Structural steel fabrication and installation',
+      'Steel frame construction',
+      'Industrial and commercial structural works',
+      'Warehouse steel structures',
+      'Mezzanine floor construction',
+      'Roof trusses and steel roofing structures',
+      'Structural reinforcement and strengthening',
+      'Structural repairs and modifications',
+      'Custom steel fabrication',
+      'Stainless steel fabrication',
+      'Mild steel fabrication',
+      'Aluminium fabrication',
+      'Sheet metal fabrication',
+      'CNC laser cutting',
+      'Metal bending and rolling',
+      'Custom brackets, frames, and supports',
+      'MIG welding',
+      'TIG welding',
+      'Arc (Stick) welding',
+      'Stainless steel welding',
+      'Aluminium welding',
+      'On-site welding services',
+      'Heavy equipment welding and repairs',
+      'Welding maintenance and reinforcement',
+      'Sliding gates',
+      'Swing gates',
+      'Automated gates',
+      'Pedestrian gates',
+      'Security gates',
+      'Decorative gates',
+      'Steel doors',
+      'Burglar proofing',
+      'Window grills',
+      'Security fencing'
+    ] 
+  },
+  'staircases': { 
+    title: 'Staircases, Balustrades & Balconies', 
+    desc: 'Premium installations that combine safety with striking visual appeal. We design and fit bespoke staircases and balcony systems.', 
+    list: [
+      'Custom staircase design',
+      'Straight staircases',
+      'Spiral staircases',
+      'Floating staircases',
+      'Steel staircases',
+      'Stainless steel staircases',
+      'Indoor and outdoor staircases',
+      'Staircase renovation and upgrades',
+      'Staircase fabrication and installation',
+      'Landings and staircase framing',
+      'Frameless glass balustrades',
+      'Semi-frameless glass balustrades',
+      'Stainless steel and glass balustrades',
+      'Balcony glass railings',
+      'Staircase glass railings',
+      'Tempered safety glass installation',
+      'Glass partition systems',
+      'Glass balustrade repairs and replacement',
+      'Custom steel balconies',
+      'Cantilever balconies',
+      'Residential balcony construction',
+      'Commercial balcony fabrication',
+      'Balcony extensions',
+      'Steel support structures',
+      'Balcony repairs and reinforcement',
+      'Powder-coated and galvanized finishes',
+      'Stainless steel handrails',
+      'Mild steel handrails',
+      'Glass handrails',
+      'Aluminium handrails'
+    ] 
+  },
+  'roofing': { 
+    title: 'Roofing Services', 
+    desc: 'Durable roofing solutions to protect your property from the elements. We use premium materials for lasting weather resistance.', 
+    list: [
+      'New Roof Installation',
+      'Roof Repairs & Maintenance',
+      'Guttering & Downpipes',
+      'Waterproofing & Damp Proofing',
+      'Roof Inspections',
+      'Shingle & Tile Roofing',
+      'Flat Roof Systems',
+      'Ceiling & Roof Insulation'
+    ] 
+  },
+  'painting': { 
+    title: 'Painting & Decorating', 
+    desc: 'Flawless finishes that bring your interior and exterior walls to life. We prepare surfaces thoroughly for long-lasting results.', 
+    list: [
+      'Interior Painting',
+      'Exterior Painting',
+      'Wallpapering',
+      'Surface Preparation & Filling',
+      'Texture & Stucco Finishes',
+      'Wood & Metal Varnishing',
+      'Concrete Floor Epoxy Coating',
+      'Staining & Sealing'
+    ] 
+  },
   'landscape-gardener': { title: 'Landscape Gardener', desc: 'Our professional landscape gardening services transform your outdoor spaces into lush, functional environments. We handle everything from soil preparation and planting to ongoing maintenance, ensuring your garden thrives in Kenya\'s unique climate.' },
   'artificial-turf': { title: 'Artificial Turf Installation', desc: 'High-quality synthetic grass solutions for residential, commercial, and recreational spaces. Our artificial turf looks natural year-round, requires minimal maintenance, saves water, and provides a durable surface perfect for families and pets.' },
   'concrete-masonry': { title: 'Concrete Masonry', desc: 'Expert concrete work and masonry services including foundations, retaining walls, decorative pathways, and custom stonework. We use premium mixes and reinforced techniques built to withstand the test of time.' },
@@ -386,7 +596,6 @@ function initServiceModals() {
   const listEl = document.getElementById('modalList');
 
   document.querySelectorAll('[data-modal]').forEach(btn => {
-    // FIX: Ensure cursor pointer is applied to all clickable service items
     btn.style.cursor = 'pointer';
     
     btn.addEventListener('click', (e) => {
@@ -438,7 +647,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initServiceModals();
 });
 
-// Safety net: Refresh ScrollTrigger on window load to fix any late-layout-shift issues
 window.addEventListener('load', () => {
   ScrollTrigger.refresh();
 });
