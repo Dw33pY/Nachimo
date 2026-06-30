@@ -4,6 +4,8 @@
 
 /* ——— CUSTOM PROPERTIES ——— */
 :root {
+  color-scheme: light; /* FIX: Forces browsers to respect light mode colors */
+  
   --c-primary: #1a4d2e;        
   --c-primary-light: #2a6b42;
   --c-primary-dark: #0f2e1b;
@@ -399,7 +401,43 @@ p { margin-bottom: 1em; color: var(--c-text-light); }
 .modal-content h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 1rem; }
 .modal-content p { font-size: 1rem; line-height: 1.8; color: var(--c-text-light); margin-bottom: 1.5rem; }
 .modal-content .modal-sublist { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
-.modal-content .modal-sublist-item { background: var(--c-cream); padding: 1rem; border-radius: var(--radius-md); font-size: 0.9rem; font-weight: 600; color: var(--c-dark); display: flex; align-items: center; gap: 0.5rem; }
-.modal-content .modal-sublist-item::before { content: '•'; color: var(--c-secondary); font-size: 1.2rem; }
+.modal-content .modal-sublist-item { 
+  background: var(--c-cream); 
+  border-radius: var(--radius-md); 
+  overflow: hidden; 
+  border: 1px solid var(--c-border);
+}
+.modal-sublist-title { 
+  width: 100%; 
+  padding: 1rem; 
+  font-size: 0.9rem; 
+  font-weight: 600; 
+  color: var(--c-dark); 
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem; 
+  cursor: pointer; 
+  transition: background 0.3s; 
+  text-align: left; 
+  background: transparent;
+}
+.modal-sublist-title:hover { background: rgba(230, 126, 34, 0.1); }
+.modal-sublist-title span { flex: 1; }
+.modal-sublist-icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--c-secondary); transition: transform 0.3s ease; }
+.modal-sublist-item.is-open .modal-sublist-icon { transform: rotate(45deg); }
+.modal-sublist-desc { 
+  max-height: 0; 
+  overflow: hidden; 
+  transition: max-height 0.4s ease, padding 0.4s ease; 
+  padding: 0 1rem; 
+  font-size: 0.85rem; 
+  font-weight: 400; 
+  color: var(--c-text-light); 
+  line-height: 1.5; 
+}
+.modal-sublist-item.is-open .modal-sublist-desc { 
+  max-height: 200px; 
+  padding: 0 1rem 1rem 1rem; 
+}
 .modal-content .btn { width: 100%; justify-content: center; }
 @media(max-width: 600px) { .modal-content .modal-sublist { grid-template-columns: 1fr; } }
